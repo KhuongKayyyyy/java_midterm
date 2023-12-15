@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Cart</title>
+    <base href="/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        img {
+            margin-top: 20px;
+        }
+
+        .bg-secondary {
+            background-color: #ffffff!important;
+        }
+        .btn-pink {
+            background-color :#ffc0cb;
+            color: #fff;
+        }
+        .btn-primary,
+        .btn-danger {
+            color: #fff;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #abe5e5;
+        }
+
+        .btn-danger {
+            background-color: #ffc0cb;
+            border-color: #dc3545;
+        }
+
+        .image {
+            width: 200px;
+            height: 300px;
+            margin: auto;
+        }
+
+        body {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Optima', cursive;
+            background-image: url('/img/cartbg.jpeg');
+        }
+
+        #proceed {
+            color: #ffffff;
+            border: none;
+            background-color: #ABE5E5;
+        }
+    </style>
+</head>
+
+<body>
+<div th:replace="users/fragments/header :: header"> </div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- print list product -->
+        <div class="row justify-content-center p-5">
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-2 col-md-4">
+                <!-- Size End -->
+            </div>
+            <!-- Shop Sidebar End -->
+
+            <div class="container-fluid">
+                <div class="row px-xl-5 my-5">
+                    <div class="col-lg-8 table-responsive mb-5">
+                        <table class="table table-light table-borderless table-hover text-center mb-0">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Image</th>
+                                <th>Products</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody class="align-middle" th:each="books: ${bookList}">
+                            <tr>
+                                <td><img th:src="@{${'/images/' + books.image}}" alt="" style="width: 50px;"> </td>
+                                <td class="align-middle" th:text="${books.name}"> Product Name</td>
+
+                                <td class="align-middle book-price" th:text="${books.price}"></td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus">
+                                                <i class="bi bi-dash"></i>
+                                            </button>
+                                        </div>
+                                        <input class="form-control form-control-sm bg-secondary border-0 text-center quantity-input" type="text" value="1" data-book-id="${books.id}">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="bi bi-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="total-price-per-book" data-book-id="${books.id}">0</span>
+                                </td>
+                                <td class="align-middle">
+                                    <button class="btn btn-sm btn-danger" onclick="deleteBook(${books.id})">
+                                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal" th:attr="data-employeeid=${books.id}">
+                                            <i class="bi bi-x"></i>
+                                        </a>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5 class="section-title position-relative text-uppercase mb-3 my-3"><span class=" pr-3" style="color:black;font-weight: bold;text-decoration: underline">Cart Summary</span></h5>
+                        <div class=" p-30 mb-5">
+                            <div class="border-bottom pb-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6>Subtotal</h6>
+                                    <h6 class="subtotal-price">100.000 VND</h6>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-medium">Shipping</h6>
+                                    <h6 class="font-weight-medium">20,000 VND</h6>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5>Total</h5>
+                                    <h5 class="total-price">120.000 VND</h5>
+                                </div>
+<!--                                <button id="proceed" class="btn btn-block btn-primary font-weight-bold my-3 py-3"-->
+<!--                                        th:onclick="'javascript:window.location.href=' + @{/users/cart/proceedToOrder}">Proceed To Checkout</button>-->
+                                </div>
+                                    <a id="proceedToOrderBtn" th:href="@{/users/cart/proceedToOrder}" class="btn btn-pink">Proceed to Order</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Modal HTML -->
+            <div id="deleteEmployeeModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="deleteEmployeeForm" method="post" th:action="@{'/users/cart/' + ${employeeid}}">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Delete Employee</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete this book?</p>
+                                <p class="text-warning"><small>This action cannot be undone.</small></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ... (previous HTML code) ... -->
+
+            <script th:inline="javascript">
+                $(document).ready(function () {
+                    // Initial update for all items in the cart
+                    updateTotal();
+
+                    // Event listener for quantity change on all input elements with class 'quantity-input'
+                    $('.quantity-input').change(function () {
+                        updateTotal();
+                    });
+
+                    $('.btn-minus, .btn-plus').click(function () {
+                        var inputElement = $(this).closest('tr').find('.quantity-input');
+                        var inputValue = parseInt(inputElement.val()) || 1; // Default to 1 if not a valid number
+
+                        // Event listener for the minus button
+                        if ($(this).hasClass('btn-minus')) {
+                            inputValue = Math.max(1, inputValue - 1);
+                        }
+
+                        // Event listener for the plus button
+                        if ($(this).hasClass('btn-plus')) {
+                            inputValue = inputValue + 1;
+                        }
+
+                        inputElement.val(inputValue);
+                        updateTotal();
+                    });
+
+                    function updateTotal() {
+                        var subtotal = 0;
+
+                        // Iterate through each input element with class 'quantity-input'
+                        $('.quantity-input').each(function () {
+                            var bookPrice = parseFloat($(this).closest('tr').find('.book-price').text());
+                            var quantity = parseInt($(this).val()) || 1; // Default to 1 if not a valid number
+
+                            var total = bookPrice * quantity;
+                            subtotal += total;
+
+                            // Update the total price for each book
+                            $(this).closest('tr').find('.total-price').text(total.toFixed(2));
+                        });
+
+                        // Calculate the total of the entire order as the sum of subtotal and 20000
+                        var shippingCost = 20000;
+                        var orderTotal = subtotal + shippingCost;
+
+                        // Update the subtotal and total in the HTML
+                        $('.subtotal-price').text(subtotal.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' VND');
+                        $('.total-price').text(orderTotal.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' VND');
+
+                        // Update the total for each book
+                        $('.total-price-per-book').each(function () {
+
+                            var bookId = $(this).data('book-id');
+                            var bookPrice = parseFloat($(this).closest('tr').find('.book-price').text());
+                            var quantity = parseInt($(this).closest('tr').find('.quantity-input').val()) || 1;
+                            var total = bookPrice * quantity;
+                            $(this).text(total.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' VND');
+                        });
+                    }
+                });
+            </script>
+
+            <!-- ... (remaining HTML code) ... -->
+
+
+            <script th:inline="javascript">
+                    $(document).ready(function () {
+                        $('.delete').click(function () {
+                            var employeeId = $(this).data('employeeid');
+                            console.log('Employee ID:', employeeId); // Log the employee ID to the console for debugging
+                            $('#deleteEmployeeForm').attr('action', '/users/cart/' + employeeId);
+                        });
+                    });
+                </script>
+                <script th:inline="javascript">
+                    $(document).ready(function () {
+                        // ... (previous JavaScript code)
+
+                        // Event listener for the "Proceed to Order" button
+                        $('#proceedToOrderBtn').click(function (event) {
+                            // Prevent the default behavior of the link
+                            event.preventDefault();
+
+                            // Get the total value from the HTML
+                            var orderTotal = parseFloat($('.total-price').text().replace(' VND', '').replace(',', ''));
+
+                            // Append the total value to the URL and navigate to the checkout page
+                            var checkoutUrl = $(this).attr('href') + '?total=' + orderTotal;
+                            window.location.href = checkoutUrl;
+                        });
+                    });
+                </script>
+
+</div>
+    </div>
+</div>
+
+<!-- Footer Web -->
+<jsp:include page="/WEB-INF/views/users/footer.jsp"></jsp:include>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{../js/app.js}"></script>
+</body>
+
+</html>

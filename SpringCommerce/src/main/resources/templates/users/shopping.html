@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>TDTU Libraries</title>
+    <base href="/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+
+
+        .image {
+            width: 200px;
+            margin: auto;
+        }
+        .btn-dark {
+          background-color: pink;
+          border: none;
+        }
+        body{
+            background-image: url('/img/shopbackground.jpeg');
+		    display: flex;
+		    width: 100vw;
+		    height: 100vh;
+			font-family: 'Optima', cursive;
+		}
+        .welcome {
+		    position: absolute;
+		    bottom: 50%;
+		    left: 38px;
+		    font-family: 'Inter';
+		    font-style: italic;
+		    font-weight: 700;
+		    font-size: 33px;
+		    line-height: 93px;
+		    color: #FFFFFF;
+
+		}
+		 .brand {
+			position: absolute;
+            bottom: 160px;
+            left: 200px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 70px;
+            line-height: 182px;
+            color: #FFFFFF;
+		}
+		.introduce{
+			position: absolute;
+		    bottom: 147px;
+		    left: 40px;
+		    font-family: 'Inter';
+		    font-style: italic;
+		    font-weight: 300;
+		    font-size: 26px;
+		    line-height: 57px;
+		    color: #FFFFFF;}
+		.introduce1{
+			position: absolute;
+		    bottom: 160px;
+		    left: 200px;
+		    font-family: 'Inter';
+		    font-style: italic;
+		    font-weight: 700;
+		    font-size: 70px;
+		    line-height: 182px;
+		    color: #FFFFFF;}
+		.caunoi{
+		    position: absolute;
+		    bottom: 65px;
+		    left: 40px;
+		    font-family: 'Inter';
+		    font-style: italic;
+		    font-weight: 300;
+		    font-size: 48px;
+		    line-height: 103px;
+		    color: #FFFFFF;
+		}
+		.carousel-images{
+			width : 100%;
+			height : 550px;
+			object-fit: cover;
+		}
+
+		.cate{
+            left: 18px;
+            top: 795px;
+            text-decoration: underline;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            /* line-height: 39px; */
+            color: #28486E;
+        }
+         .card {
+          transition: box-shadow 1s;
+           border: 1px solid #ccc;
+           background: #fff;
+           float: left;
+           box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+           padding : 15px;
+        }
+
+        .card:hover  {
+            margin-top: 100px;
+            padding: 0;
+        }
+        .card-footer{
+        	background: #D8EAE9;
+        }
+        .page{
+            color : white;
+            font-weight : bold;
+            font-size: 25px;
+        }
+        .rec{
+            box-sizing: border-box;
+            /* position: absolute; */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #D9D9D9;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="users/fragments/header :: header"> </div>
+
+    <div class="container-fluid">
+        <div class = "row my-4"  >
+        <div id="carouselExampleControls" class="carousel slide mb-3 mt-5" data-bs-ride="carousel" >
+  <div class="carousel-inner ">
+    <div class="carousel-item active">
+      <img th:src="@{../img/lib2.jpeg}" class="carousel-images"  alt="...">
+      <div class="welcome">Welcome to</div>
+      <div class="brand">TDT Library</div>
+      <div class = "introduce">Top 100 university in the world</div>
+	<div  class = "caunoi">Light from here shall illuminate the entire universe</div>
+
+  </div>
+      <div class="carousel-item">
+      <img th:src="@{../img/lib1.jpeg}" class="carousel-images"  alt="...">
+      <div class = "introduce1"> TDT Library Store</div>
+
+  </div>
+      <div class="carousel-item">
+      <img th:src="@{../img/tdtulogo.jpeg}" class="carousel-images"  alt="...">
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+        </div>
+
+        <div class = "row my-4" >
+         <div class = "cate text-center"> Book We Have Here</div>
+			<div class="cate text-center" th:if="${category_id != null}">Search by Category</div>
+			<div class="cate text-center" th:if="${brand_id != null}">Search by Category</div>
+		</div>
+<!-- print list product -->
+        <div class="row justify-content-center">
+            <!-- Shop Sidebar Start -->
+
+    <!-- Shop Sidebar End -->
+		 <div class="col-12">
+		     <div class="row justify-content-start">
+		          <div th:each="books: ${bookList}" class="col-lg-3 col-md-6">
+		          	<div class="card my-3 mx-2">
+						<a th:href="@{/users/productDetail(booksId=${books.id})}">
+							<img class="card-img-top" th:src="@{'/images/' + ${books.image}}" alt="image" />
+						</a>
+		              <div class="card-body ">
+		             <h6 style="text-align: justify;" class="card-title" th:text="${books.name}"></h6>
+<!--						  <h6 style="text-align: justify;" class="card-title" th:text="${books.category_id == 1 ? 'Classic' :-->
+<!--								   (books.category_id == 2 ? 'Self-help' :-->
+<!--								   (books.category_id == 3 ? 'Romance' :-->
+<!--								   (books.category_id == 4 ? 'Memoirs' :-->
+<!--								   (books.category_id == 5 ? 'Science fiction' : 'Unknown'))))}"></h6>-->
+		                  <div >
+		                  		<h5 class="price" th:text="${books.price}" style="display:inline-block" ></h5><h4  style="display:inline-block">đ</h4>
+		                  </div>
+						  <a th:href="@{/users/cart/{bookId}(bookId=${books.id})}" class="btn btn-dark">Add To Cart</a>
+		             	 </div>
+		              <div class="card-footer text-muted">
+		                  &#9733; &#9733; &#9733; &#9733; &#9734;
+		              </div>
+		          	</div>
+		          </div>
+		     </div>
+		     </div>
+		     </div>
+		     <div class="row mt-4 page">
+		     	<div th:if="${totalPages > 1}">
+		     	<div class = "row justify-content-center">
+		     	<div class = "col-1 " >
+		     		<a th:if="${currentPage > 1}" th:href="@{'/users/shopping/1'}" style = "color:white">First</a>
+					<span th:unless="${currentPage > 1}">First</span>
+				</div>
+		     	<div class = "col-1"  align="center" style = "">
+		     		<div class = "rec">
+		     		<a th:if="${currentPage > 1}" th:href="@{'/users/shopping/' + ${currentPage - 1}}" style = "color:pink"><i class="bi bi-arrow-left"></i></a>
+					<span th:unless="${currentPage > 1}"><i class="bi bi-arrow-left"></i></span></div>
+				</div>
+		     	<div class = "col-1" align="center" style = "" >
+
+		     		 <span class="col-sm-1" th:each="i: ${#numbers.sequence(1, totalPages)}">
+					<a th:if="${currentPage != i}" th:href="@{'/users/shopping/' + ${i}}" style = "color:white">[[${i}]]</a>
+
+					<span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;</span>
+
+				</div>
+		     	<div class = "col-1" align="center" style = "" >
+		     	<div class = "rec">
+		     		<a th:if="${currentPage < totalPages}" th:href="@{'/users/shopping/' + ${currentPage + 1}}" style = "color:pink"><i class="bi bi-arrow-right"></i></a>
+					<span th:unless="${currentPage < totalPages}" ><i class="bi bi-arrow-right"></i></span></div>
+		     	</div>
+		     	<div class = "col-1" >
+
+		     		<a th:if="${currentPage < totalPages}" th:href="@{'/users/shopping/' + ${totalPages}}" style = "color:white">Last</a>
+					<span th:unless="${currentPage < totalPages} " >Last</span></div>
+
+		     	</div>
+
+				</div>
+		     </div>
+		 </div>
+</div>
+    </div>
+<!-- Footer Web -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <script type="text/javascript" th:src="@{../js/app.js}"></script>
+   </body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Book Detail</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <base href="/">
+  <style>
+
+        img {
+            margin-top: 20px;
+        }
+
+        .image {
+            width: 200px;
+            margin: auto;
+        }
+    	    body{
+		    	font-family: 'Optima', cursive;
+         		background-image: url('/img/bg.webp');
+         		font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #9e49b1;
+		    }
+		    .text-white {
+				color: #E7BA89!important;
+			}
+			.bg-dark {
+				background-color: #FFF7E8!important;
+			}
+			.text-primary {
+				color: #C0C4E5!important;
+			}
+			a {
+				color: #C0C4E5;
+				text-decoration: none;
+				background-color: transparent;
+				-webkit-text-decoration-skip: objects;
+			}
+			.list-group-item {
+				position: relative;
+				display: block;
+				padding: 0.75rem 1.25rem;
+				margin-bottom: -1px;
+				background-color: #FAEEE4;
+				border: 4px solid rgba(193,215,219,.4);
+			}
+    </style>
+</head>
+<body>
+<!--
+<jsp:include page="/WEB-INF/views/clothes/header.jsp"></jsp:include>
+-->
+<div th:replace="users/fragments/header :: header"> </div>
+<div class="container">
+  <div class="row justify-content-center text-primary">
+    <div class="col- d-flex justify-content-center">
+      <h1>Books Detail</h1>
+      <hr>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-7">
+      <table class="table table-striped">
+        <tbody>
+        <tr>
+          <th scope="row">Books Id:</th>
+
+          <td th:text="${books.id}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Books Name:</th>
+          <td th:text="${books.name}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Books Price:</th>
+          <td th:text="${books.price}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Books Description:</th>
+          <td th:text="${books.description}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Books Quantity:</th>
+          <td th:text="${books.quantity}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Books Category:</th>
+          <td th:text="${books.category_id == 1 ? 'Classic' :
+                   (books.category_id == 2 ? 'Self-help' :
+                   (books.category_id == 3 ? 'Romance' :
+                   (books.category_id == 4 ? 'Memoirs' :
+                   (books.category_id == 5 ? 'Science fiction' : 'Unknown'))))}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Books Brand:</th>
+          <td th:text="${books.brand != null ? books.brand.name : 'Unknown'}"></td>
+        </tr>
+        <tr>
+          <th scope="row">Books Image:</th>
+        </tr>
+        </tbody>
+      </table>
+      <div>
+        <a th:href="@{/users/cart/{bookId}(bookId=${books.id})}" class="btn btn-dark">Add To Cart</a>
+      </div>
+
+      <div class="rounded">
+        <div class="image rounded mt-2">
+          <img class="image" th:src="@{${'/images/' + books.image}}" alt="image" />
+        </div>
+      </div>
+      <hr>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

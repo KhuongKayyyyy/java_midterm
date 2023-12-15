@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Homepage</title>
+    <base href="/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <style>
+        body{
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Optima', cursive;
+        }
+
+        .menu {
+            float: left;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .menu a {
+            background-color: #e5e5e5;
+            padding: 8px;
+            margin-top: 7px;
+            display: block;
+            width: 100%;
+            color: black;
+            border-radius: 10px;
+        }
+        .menu a:hover {
+            color: rgb(0,0,0,0.7);
+        }
+        img {
+            width: 150%;
+            margin-top: 20px;
+        }
+        
+        .image {
+            height: 170px;
+        }
+        .pl-3{
+   
+        	padding-left: 20px;
+        }
+ 
+        body{
+         background-image: url('/img/bg.webp');
+        }
+		h5{
+		color : cadetblue;
+		}
+		.text-black {
+          color: black;
+        }
+		.bg-light{
+		    background-color: #b6dde6!important;
+		}
+    </style>
+</head>
+
+<body>
+    <div th:replace="users/fragments/header :: header"> </div>
+    
+    <div class="container-fluid">
+        <div class="row justify-content-center text-primary">
+            <div class="col- d-flex justify-content-center">
+                <div></div>
+                <hr>
+            </div>
+        </div>
+        <div class="row justify-content-center text-primary">
+            <div class="col- d-flex justify-content-center">
+                
+                
+            </div>
+        </div>
+        
+<!-- Categories Start -->
+<div class="container-fluid pt-5">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+    	<span class="pr-3" style = "color:#eec4c5">Categories</span>
+    </h2>
+    <div class="row px-xl-5 pb-3">
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <a class="text-decoration-none" href="">
+                <div class="cat-item d-flex align-items-center mb-4">
+                    <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                    	<img th:href="@{/users/shopping/byCate?category_id=1}" class="img-fluid" src="/img/classic.webp" alt="">
+                	</div>
+	                <div class="flex-fill pl-3">
+                        <h5>
+                            <a th:href="@{/users/shopping/byCate?category_id=1}" style="color: inherit; text-decoration: none;">Classics</a>
+                        </h5>
+	                    <small class="text-black" >These are books that have stood the test of time and are considered to be of high literary merit.</small>
+	                </div>
+	            </div>
+	        </a>
+	    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+        <a class="text-decoration-none" href="">
+            <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                    <img class="img-fluid" src="/img/selfhelp.webp" alt="">
+                </div>
+                <div class="flex-fill pl-3">
+                    <h5>
+                        <a th:href="@{/users/shopping/byCate?category_id=2}" style="color: inherit; text-decoration: none;">Self-Help</a>
+                    </h5>
+                    <small class="text-black">These are books that aim to help readers improve themselves or their lives in some way.</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+        <a class="text-decoration-none" href="">
+            <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                    <img th:href="@{/users/shopping/byCate?category_id=4}" class="img-fluid" src="/img/memors.webp" alt="">
+                </div>
+                <div class="flex-fill pl-3">
+                    <h5>
+                        <a th:href="@{/users/shopping/byCate?category_id=4}" style="color: inherit; text-decoration: none;">Memoirs</a>
+                    </h5>
+                    <small class="text-black">These are books in which the author writes about their own life experiences</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+        <a class="text-decoration-none" href="">
+            <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                    <img th:href="@{/users/shopping/byCate?category_id=5}" class="img-fluid" src="/img/sciene.jpeg" alt="">
+                </div>
+                <div class="flex-fill pl-3">
+                    <h5>
+                        <a th:href="@{/users/shopping/byCate?category_id=5}" style="color: inherit; text-decoration: none;">Science fiction</a>
+                    </h5>
+                    <small class="text-black">These are books that imagine a future world or alternate reality, often with advanced technology or other-worldly creatures.</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+        <a class="text-decoration-none" href="">
+            <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                    <img th:href="@{/users/shopping?category_id=3}" class="img-fluid" src="/img/romance.jpeg" alt="">
+                </div>
+                <div class="flex-fill pl-3">
+                    <h5>
+                        <a th:href="@{/users/shopping/byCate?category_id=3}" style="color: inherit; text-decoration: none;">Romance</a>
+                    </h5>
+                    <small class="text-black">These are books that focus on love and romantic relationships</small>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+<!-- Categories End -->
+
+        <!-- Categories Start -->
+        <div class="container-fluid pt-5">
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+                <span class="pr-3" style = "color:#eec4c5">Brand</span>
+            </h2>
+            <div class="row px-xl-5 pb-3">
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                    <a class="text-decoration-none" href="">
+                        <div class="cat-item d-flex align-items-center mb-4">
+                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                                <img th:href="@{/users/shopping?brand_id=1}" class="img-fluid" src="/img/kimdong.png" alt="">
+                            </div>
+                            <div class="flex-fill pl-3">
+                                <h5>
+                                    <a th:href="@{/users/shopping/byBrand?brand_id=1}" style="color: inherit; text-decoration: none;">NXB KIM DONG</a>
+                                </h5>
+                                <small class="text-black" >Books from KIM DONG</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                    <a class="text-decoration-none" href="">
+                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                                <img class="img-fluid" src="/img/hanoi.png" alt="">
+                            </div>
+                            <div class="flex-fill pl-3">
+                                <h5>
+                                    <a th:href="@{/users/shopping/byBrand?brand_id=3}" style="color: inherit; text-decoration: none;">NXB HA NOI</a>
+                                </h5>
+                                <small class="text-black">Books from HA NOI</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                    <a class="text-decoration-none" href="">
+                        <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                            <div class="overflow-hidden" style="width: 100px; height: 100px;">
+                                <img th:href="@{/users/shopping?brand_id=3}" class="img-fluid" src="/img/hcm.jpg" alt="">
+                            </div>
+                            <div class="flex-fill pl-3">
+                                <h5>
+                                    <a th:href="@{/users/shopping/byBrand?brand_id=2}" style="color: inherit; text-decoration: none;">NXB HO CHI MINH</a>
+                                </h5>
+                                <small class="text-black">Books from HO CHI MINH</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+<!-- Featured Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3" style="color">
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+            <h5 class="font-weight-semi-bold m-0 text-light">Java Technology</h5>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+        <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+            <h5 class="font-weight-semi-bold m-0 text-light">Midterm Report</h5>
+        </div>
+    </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                <h5 class="font-weight-semi-bold m-0 text-light">Spring MVC</h5>
+            </div>
+        </div>
+    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+        <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+            <h5 class="font-weight-semi-bold m-0 text-light">Maven</h5>
+        </div>
+    </div>
+</div>
+<!-- Featured End -->
+        <div class="row justify-content-center">
+            
+            </div>
+            <div class="col-10">
+                <div class="row">
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+<!-- Footer Web -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   </body>
+
+</html>
